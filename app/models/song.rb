@@ -14,6 +14,9 @@ class Song < ApplicationRecord
     country = self.country
     ISO3166::Country[country]
   end
+  def mp3_audio_path
+    ActiveStorage::Blob.service.path_for(mp3_audio.key)
+  end
 
 
 

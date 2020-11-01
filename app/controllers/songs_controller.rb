@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
   before_action :authenticate_profile!, :except => [:index, :show]
   before_action :set_song, only: [:show, :edit, :update, :destroy]
+  include ActiveStorage::FileServer
 
   # GET /songs
   # GET /songs.json
@@ -11,6 +12,14 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+    #puts request.headers.inspect
+    #puts request.headers["HTTP_REFERER"].inspect
+    if authenticate_token
+      @song = Song.find_by_id(params[:id])
+      serve_file @song.mp3_audio_path,content_type: params[:content_type], disposition: "inline"
+    else
+      head :not_found
+    end
   end
 
   # GET /songs/new
@@ -76,4 +85,14 @@ class SongsController < ApplicationController
     def song_params
       params.require(:song).permit(:title, :slug,:mp3_audio)
     end
+
+    def authenticate_token
+      if request.headers["HTTP_REFERER"].blank? 
+        return false
+      else
+        return true
+      end
+    end
+
+
 end

@@ -28,8 +28,8 @@ $(document).ready(function(){
 
 
             <% if song.mp3_audio.attached? %>
-            mp3:"<%= rails_blob_url(song.mp3_audio) %>",
-            oga:"<%= rails_blob_url(song.mp3_audio) %>"
+            mp3:"<%= song_url(song.id) %>",
+            oga:"<%= song_url(song.id) %>"
              <% end %>
     },
     <% end %>
