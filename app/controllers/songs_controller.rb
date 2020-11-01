@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :authenticate_profile!, :except => [:index, :show]
+  before_action :authenticate_profile!, :except => [:index, :show, :live_song]
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   include ActiveStorage::FileServer
 
@@ -12,10 +12,12 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
-    #puts request.headers.inspect
-    #puts request.headers["HTTP_REFERER"].inspect
+
+  end
+
+  def live_song
     if authenticate_token
-      @song = Song.find_by_id(params[:id])
+      @song = Song.find_by_id(params[:song_id])
       serve_file @song.mp3_audio_path,content_type: params[:content_type], disposition: "inline"
     else
       head :not_found
