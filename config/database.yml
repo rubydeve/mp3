@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  username: porter
+  password: porter
+
+development:
+  <<: *default
+  database: porter_22
+
+test:
+  <<: *default
+  database: porter_test_22
+
+production:
+  <<: *default
+  database: porter_test_32
