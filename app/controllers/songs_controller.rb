@@ -17,7 +17,7 @@ class SongsController < ApplicationController
 
   def live_song
     if authenticate_token
-      @song = Song.find_by_id(params[:song_id])
+      @song =  Song.friendly.find(params[:song_id])
       serve_file @song.mp3_audio_path,content_type: params[:content_type], disposition: "inline"
     else
       head :not_found

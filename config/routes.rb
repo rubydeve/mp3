@@ -8,18 +8,17 @@ Rails.application.routes.draw do
 
   resources :songs do
     # collection do 
-      get :live_song 
-    
+    get :live_song 
     resources :likes, only: [:create, :destroy]
   end
 
-
-    resources :profiles do
-
-             resources :playlists, only: [:new, :create, :show, :edit, :update, :destroy]
-             resources :likes, only: [:index]
-
-          end
+  resources :profiles do
+    resources :playlists, only: [:new, :create, :show, :edit, :update, :destroy]
+    resources :likes, only: [:index]
+    collection do 
+      get :live_avatar
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'online-registration', to: 'pages#online-registration'
 
