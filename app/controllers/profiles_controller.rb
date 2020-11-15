@@ -20,12 +20,12 @@ class ProfilesController < ApplicationController
 
   def live_avatar
     if authenticate_token
-      if params.blank?
+      if params[:user_id].blank?
         @profile = current_profile
       else
         @profile = Profile.friendly.find(params[:user_id])
       end
-      serve_file @profile.avatar_path,content_type: params[:content_type], disposition: "inline"
+      (serve_file URI.open(@profile.avatar_path),content_type: params[:content_type], disposition: "inline") unless @profile.avatar.blank?
     else
       head :not_found
     end

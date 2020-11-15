@@ -1,13 +1,12 @@
 
-  <%= simple_form_for(@song) do |f| %>
- <%= f.error_notification %>
+  <%= form_for @song ,id: "aaaaedit_song"  do |f| %>
 
- <% if song.errors.any? %>
+ <% if @song.errors.any? %>
     <div id="error_explanation " class="bg-secondary text-dark">
       <h2 class="ml-2"><%= pluralize(song.errors.count, "error") %> prohibited this Song from being saved:</h2>
 
       <ul>
-      <% song.errors.full_messages.each do |message| %>
+      <% @song.errors.full_messages.each do |message| %>
         <li style="list-style: square;" class="ml-4"><%= message %></li>
       <% end %>
       </ul>
@@ -32,13 +31,13 @@
     </label>
 
 
-        <%= f.file_field :mp3_audio, id:"file-input" %>
+        <%= f.file_field :mp3_audio, id:"file-input",class: 'form-control' ,direct_upload: true  %>
                   </div>
                 </div>
 
               </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  %>
   </div>
 <% end %>

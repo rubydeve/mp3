@@ -5,8 +5,17 @@
 
 require("@rails/ujs").start()
 require("turbolinks").start()
+var path = require ("jquery")
+window.$ = path;
+window.jQuery = path;
 require("@rails/activestorage").start()
 require("channels")
+require("packs/popper.min.js")
+require("packs/bootstrap.min.js")
+require("packs/2ec2a30cc1.js")
+
+require("packs/direct_uploads.js")
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

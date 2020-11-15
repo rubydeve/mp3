@@ -10,8 +10,6 @@ class Profile < ApplicationRecord
   "#{first_name} #{last_name}"
   end
 
-    
-
   extend FriendlyId
   friendly_id :displayname, use: :slugged
 
@@ -20,7 +18,7 @@ class Profile < ApplicationRecord
   end
 
   def avatar_path
-    ActiveStorage::Blob.service.path_for(avatar.key)
+    self.avatar.service_url 
   end
 
 

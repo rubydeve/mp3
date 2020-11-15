@@ -16,7 +16,7 @@ class Song < ApplicationRecord
   end
 
   def mp3_audio_path
-    ActiveStorage::Blob.service.path_for(mp3_audio.key)
+    self.mp3_audio.service_url
   end
 
   #validates :mp3_audio, attached: true, content_type: ['mp3', 'm4a'],
